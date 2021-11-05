@@ -41,26 +41,27 @@ class _MyHomePageState extends State<MyHomePage> {
     'Let it be'
   ];
 
-  String word = 'hellp';
+  int num = 0;
+  String word = 'hello';
   String key = 'A';
-  String _message = 'test';
+  final _focusNode = FocusNode();
+  final _controller = TextEditingController();
 
 
-  void get_Word_Random(){
-    int num = Random().nextInt(8);
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
+
+  void getWordRandom(){
+    num = Random().nextInt(8);
     setState(() {
       word = textLists[num];
     });
     print(word);
   }
 
-  void _handleKeyEvent(RawKeyEvent event) {
-    setState(() {
-      _message =
-      'Key: ${event.logicalKey.debugName}, KeyId: ${event.logicalKey.keyId}';
-    });
-    print(event.logicalKey.keyLabel);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,12 +69,12 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
+      body: Center (
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              _message,
+              key,
             ),
             Text(
               word,
@@ -83,9 +84,22 @@ class _MyHomePageState extends State<MyHomePage> {
               style: Theme.of(context).textTheme.headline4,
             ),
             ElevatedButton(
-              onPressed: get_Word_Random,
+              onPressed: getWordRandom,
               child: Text(
                 '文字列表示',
+              ),
+            ),
+            RawKeyboardListener(
+              focusNode: _focusNode,
+              onKey: (event) {
+                setState(() {
+                  key = event.logicalKey.keyLabel;
+                });
+              },
+              child: TextField(
+                // enterが押された時の動作を「何もしない」ように指定（デフォルトだとフォーカスが外れるため）
+                textInputAction: TextInputAction.none,
+                controller: _controller,
               ),
             ),
           ],
