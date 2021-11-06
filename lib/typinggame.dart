@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'dart:async';
+import 'dart:io';
 
 //void main() => runApp(MyApp());
 
@@ -55,6 +58,8 @@ class _TypingGamePageState extends State<TypingGamePage> {
   int targetNum = 0; //問題数
   int length = 0; //出題した単語の文字数
   int inputWordChecker = 0; //入力されている文字が先頭から見て部分一致していれば0，していなければ-1
+  int maxLengthofInputField = 1;
+  int numofKeyTouch = 0;
   String targetWord = 'hello';
   String targetWordUntyped = 'hello';
   String targetWordtyped = '';
@@ -63,6 +68,22 @@ class _TypingGamePageState extends State<TypingGamePage> {
   final _focusNode = FocusNode();
   final _controller = TextEditingController();
   Stopwatch stopwatch = Stopwatch();
+  final File file = File("C:\\prog\\flutter\\dart\\sample.csv");
+
+
+
+  void fileRead(){
+    Stream fread = file.openRead();
+
+    fread.transform(utf8.decoder)       // Decode bytes to UTF-8.
+        .transform(new LineSplitter()) // Convert stream to individual lines.
+        .listen((String line) {        // Process results.
+          // カンマ区切りで各列のデータを配列に格納
+          //List rows = line.split(','); // split by comma
+          textLists = line.split(',');
+        }
+    );
+  }
 
   @override
   void initState() {
@@ -106,6 +127,11 @@ class _TypingGamePageState extends State<TypingGamePage> {
     if(targetWord.lastIndexOf(inputText, length) == 0){
       targetWordtyped = inputText;
       targetWordUntyped = targetWord.substring(length);
+      maxLengthofInputField = inputText.length + 2;
+
+      if(targetWordtyped.length == targetWord.length){
+        getWordRandom();
+      }
     }
   }
 
@@ -115,6 +141,7 @@ class _TypingGamePageState extends State<TypingGamePage> {
       print(stopwatch.elapsed);
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -130,29 +157,22 @@ class _TypingGamePageState extends State<TypingGamePage> {
               'Language : ' + widget.language,
               style: Theme.of(context).textTheme.headline4,
             ),
-
-            Text(
-              targetWord,
-            ),
             RichText(
               text: TextSpan(
+                //textScaleFactor: MediaQuery.of(context).textScaleFactor,
                 children: [
                   TextSpan(
                     text: targetWordtyped,
-                    style: const TextStyle(color: Colors.blue, fontSize: 24),
+                    style: const TextStyle(color: Colors.blue, fontSize: 40),
                   ),
                   TextSpan(
                     text: targetWordUntyped,
+                    style: const TextStyle(fontSize: 20),
                   )
                 ],
               ),
             ),
-            ElevatedButton(
-              onPressed: getWordRandom,
-              child: Text(
-                '文字列表示',
-              ),
-            ),
+
             //キー入力を取得
             RawKeyboardListener(
               focusNode: _focusNode,
@@ -161,9 +181,10 @@ class _TypingGamePageState extends State<TypingGamePage> {
                   key = event.logicalKey.keyLabel;
                 });
                 getWordfromTarget();
+                numofKeyTouch ++;
               },
               child: TextField(
-                maxLength: targetWord.length,
+                maxLength: maxLengthofInputField,
                 // enterが押された時の動作を「何もしない」ように指定（デフォルトだとフォーカスが外れるため）
                 textInputAction: TextInputAction.none,
                 controller: _controller,
