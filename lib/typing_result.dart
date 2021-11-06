@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-//import 'package:layout_practice/pagination.dart';
-
-void main() {
-  runApp(ResultPage(10, 'accuracy'));
-}
+import 'package:layout_practice/top.dart';
 
 class ResultPage extends StatelessWidget {
-  ResultPage(this.speed, this.accuracy);
-  final int speed;      //速さのデータ
-  final String accuracy;//正確さのデータ
+  ResultPage(this.language, this.difficulty, this.speed, this.accuracy);
+  final String language;  //選択言語
+  final String difficulty;//難易度
+  final int speed;        //速さのデータ
+  final int accuracy;     //正確さのデータ
+
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +42,7 @@ class ResultPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Container(child: Text('accuracy', textAlign: TextAlign.center)),
-                      Container(child: Text(accuracy)),
+                      Container(child: Text('$accuracy')),
                     ],
                   ),
                 ),
@@ -64,7 +63,7 @@ class ResultPage extends StatelessWidget {
                 //top button
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Navigator.of(context).pop({context, language, difficulty});
                   },
                   child: const Text('Again'),
                 ),
