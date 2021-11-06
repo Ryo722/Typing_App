@@ -5,6 +5,8 @@ import 'dart:math';
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter/services.dart';
+
 //void main() => runApp(MyApp());
 
 class TypingGame extends StatelessWidget {
@@ -44,6 +46,7 @@ class TypingGamePage extends StatefulWidget {
 
 class _TypingGamePageState extends State<TypingGamePage> {
   var textLists = <String>[
+
     'Hello World',
     'This is my App',
     'How are you?',
@@ -52,6 +55,8 @@ class _TypingGamePageState extends State<TypingGamePage> {
     'Good morning',
     'I am Japanese',
     'Let it be'
+
+
   ];
 
   int num = 0; //リストから取得する単語の番号
@@ -68,22 +73,17 @@ class _TypingGamePageState extends State<TypingGamePage> {
   final _focusNode = FocusNode();
   final _controller = TextEditingController();
   Stopwatch stopwatch = Stopwatch();
-  final File file = File("C:\\prog\\flutter\\dart\\sample.csv");
 
 
-
-  void fileRead(){
-    Stream fread = file.openRead();
-
-    fread.transform(utf8.decoder)       // Decode bytes to UTF-8.
-        .transform(new LineSplitter()) // Convert stream to individual lines.
-        .listen((String line) {        // Process results.
-          // カンマ区切りで各列のデータを配列に格納
-          //List rows = line.split(','); // split by comma
-          textLists = line.split(',');
-        }
-    );
+  void getWorkDone() async{
+    final csvFile= await rootBundle.loadString('languagecsv/C.csv');
+    for (String line in csvFile.split("\r\n")) {
+      // カンマ区切りで各列のデータを配列に格納
+      //List rows = line.split(','); // split by comma
+      textLists = line.split(',');
+    }
   }
+
 
   @override
   void initState() {
@@ -92,6 +92,8 @@ class _TypingGamePageState extends State<TypingGamePage> {
     // Start listening to changes.
     _controller.addListener(_printLatestValue);
     stopwatch.start();
+    getWorkDone();
+    getWordRandom();
   }
 
   @override
@@ -139,6 +141,15 @@ class _TypingGamePageState extends State<TypingGamePage> {
     if(targetNum == widget.difficulty){
       stopwatch.stop();
       print(stopwatch.elapsed);
+      /*
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  ResultPage(10, 'nice'))
+      );
+
+       */
     }
   }
 
@@ -154,7 +165,7 @@ class _TypingGamePageState extends State<TypingGamePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Language : ' + widget.language,
+              'Language : ' + widget.language + widget.difficulty.toString(),
               style: Theme.of(context).textTheme.headline4,
             ),
             RichText(
@@ -197,3 +208,4 @@ class _TypingGamePageState extends State<TypingGamePage> {
     );
   }
 }
+
