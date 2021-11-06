@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:layout_practice/pagination.dart';
 
 void main() {
-  runApp(ResultPage('speed', 'accuracy'));
+  runApp(ResultPage(10, 'accuracy'));
 }
 
 class ResultPage extends StatelessWidget {
   ResultPage(this.speed, this.accuracy);
-  final String speed;      //速さのデータ
+  final int speed;      //速さのデータ
   final String accuracy;//正確さのデータ
 
   @override
