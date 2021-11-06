@@ -127,6 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
             //ページ遷移をするボタン、languageとdifficultyを渡す
             ElevatedButton(
                 onPressed: (){
+                  //どちらかが選択されていないならページ遷移しない。
                   if (language != '' && difficulty != 0) {
                     Navigator.push(
                         context,
