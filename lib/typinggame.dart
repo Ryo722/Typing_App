@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import 'dart:async';
 
-void main() => runApp(MyApp());
+//void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class TypingGame extends StatelessWidget {
+  TypingGame(this.language, this.difficulty, {Key? key}) : super(key: key);
+
+  final String language;
+  final String difficulty;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -46,12 +51,14 @@ class _MyHomePageState extends State<MyHomePage> {
   int length = 0;
   int inputWordChecker = 0;
   String targetWord = 'hello';
+  String targetWordUntype = 'hello';
+  String targetWordtyped = '';
   String key = 'A';
   String inputText = '';
   final _focusNode = FocusNode();
   final _controller = TextEditingController();
-  Timer timer;
-  Datetime time;
+  //Timer timer;
+  //Datetime time;
 
   @override
   void initState() {
@@ -76,8 +83,10 @@ class _MyHomePageState extends State<MyHomePage> {
     num = Random().nextInt(8);
     setState(() {
       targetWord = textLists[num];
+      targetWordUntype = textLists[num];
+      _controller.clear();
     });
-    print(targetWord);
+    print(targetWordUntype);
   }
 
   void getWordfromTarget(){
@@ -92,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Container (
+      body: Center (
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -103,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
               targetWord,
             ),
             Text(
-              targetWord,
+              targetWordUntype,
               style: Theme.of(context).textTheme.headline4,
             ),
             ElevatedButton(
@@ -122,6 +131,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 getWordfromTarget();
               },
               child: TextField(
+                maxLength: targetWord.length,
                 // enterが押された時の動作を「何もしない」ように指定（デフォルトだとフォーカスが外れるため）
                 textInputAction: TextInputAction.none,
                 controller: _controller,
