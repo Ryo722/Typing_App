@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 //import 'package:layout_practice/pagination.dart';
+import 'package:typing_app/top.dart';
 
 void main() {
   runApp(ResultPage(10, 'accuracy'));

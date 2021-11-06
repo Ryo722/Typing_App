@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:typing_app/TypingGame.dart';
-import 'package:typing_app/page_change_test.dart';
+//import 'package:typing_app/page_change_test.dart';
+import 'package:typing_app/typinggame.dart';
 
 void main() {
   runApp(const Top());
@@ -29,19 +29,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String language = '';     //言語を選択
-  String difficulty = '';   //難易度を選択
-
-
-
-  @override
-  Widget build(BuildContext context) {
-    final ButtonStyle style = ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 40));
-
-
+  int difficulty = 0;   //難易度を選択
   static const List<String> languageList = ['C','C#','C++','python','Java Script','Java','php','ruby','go'];
   List<bool> languageChecker = List.generate(languageList.length, (_) => false);
-  static const List<String> difficultyList = ['簡単','普通','難しい'];
+  static const List<int> difficultyList = [10,15,20];
   List<bool> difficultyChecker = List.generate(difficultyList.length, (_) => false);
+
 
   @override
   Widget build(BuildContext context) {
@@ -110,10 +103,10 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             //難易度選択ボタン
             ToggleButtons(
-              children: <Widget>[
-                Text(difficultyList[0]),
-                Text(difficultyList[1]),
-                Text(difficultyList[2]),
+              children: const <Widget>[
+                Text('10問'),
+                Text('15問'),
+                Text('20問'),
               ],
               onPressed: (int index){
                 setState(() {
@@ -134,12 +127,11 @@ class _MyHomePageState extends State<MyHomePage> {
             //ページ遷移をするボタン、languageとdifficultyを渡す
             ElevatedButton(
                 onPressed: (){
-
-                  if (language != '' && difficulty != '') {
+                  if (language != '' && difficulty != 0) {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => NewPage(language, difficulty))
+                            builder: (context) => TypingGame(language, difficulty))
                     );
                   }
 
