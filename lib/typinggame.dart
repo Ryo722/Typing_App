@@ -154,7 +154,7 @@ class _TypingGamePageState extends State<TypingGamePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Language : ' + widget.language,
+              'Language : ' + widget.language + widget.difficulty.toString(),
               style: Theme.of(context).textTheme.headline4,
             ),
             RichText(
