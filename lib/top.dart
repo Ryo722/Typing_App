@@ -35,12 +35,12 @@ class _MyHomePageState extends State<MyHomePage> {
       'C',
       'C#',
       'C++',
-      'python',
-      'Java Script',
+      'Python',
+      'JavaScript',
       'Java',
-      'php',
-      'ruby',
-      'go'
+      'PHP',
+      'Ruby',
+      'Go'
     ];
     List<bool> languageChecker = List.generate(
         languageList.length, (_) => false);
