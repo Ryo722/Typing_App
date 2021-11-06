@@ -28,12 +28,13 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String language = '';     //言語を選択
   String difficulty = '';   //難易度を選択
-
+  static const List<String> languageList = ['C','C#','C++','python','Java Script','Java','php','ruby','go'];
+  List<bool> languageChecker = List.generate(languageList.length, (_) => false);
+  static const List<String> difficultyList = ['簡単','普通','難しい'];
+  List<bool> difficultyChecker = List.generate(difficultyList.length, (_) => false);
 
   @override
   Widget build(BuildContext context) {
-    final ButtonStyle style = ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 40));
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('ここにタイトルを入れる'),
@@ -45,30 +46,55 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(
                 '言語を選択してください'
             ),
-            
-            //
-            
-            //言語選択をする。トグルボタンのリスト予定
-            ElevatedButton(
-              style: style,
-              onPressed: () {
-                  language = 'C';
-              },
-              child: const Text('C'),
-            ),
-            const Text(
-              '難易度を選択してください'
+
+            //言語選択ボタン
+            ToggleButtons(
+                children: <Widget>[
+                  Text(languageList[0]),
+                  Text(languageList[1]),
+                  Text(languageList[2]),
+                  Text(languageList[3]),
+                  Text(languageList[4]),
+                  Text(languageList[5]),
+                  Text(languageList[6]),
+                  Text(languageList[7]),
+                  Text(languageList[8]),
+                ],
+                onPressed: (int index){
+                  setState(() {
+                    for(int buttonIndex = 0; buttonIndex < languageChecker.length; buttonIndex++){
+                      if(buttonIndex == index) {
+                        languageChecker[buttonIndex] = true;
+                        language = languageList[buttonIndex];
+                      }else{
+                        languageChecker[buttonIndex] = false;
+                      }
+                    }
+                  });
+                },
+                isSelected: languageChecker,
             ),
 
-            //難易度を選択する。トグルボタンのリスト予定
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle:  const TextStyle(fontSize: 40),
-              ),
-              onPressed: () {
-                difficulty = '普通';
+            //難易度選択ボタン
+            ToggleButtons(
+              children: <Widget>[
+                Text(difficultyList[0]),
+                Text(difficultyList[1]),
+                Text(difficultyList[2]),
+              ],
+              onPressed: (int index){
+                setState(() {
+                  for(int buttonIndex = 0; buttonIndex < difficultyChecker.length; buttonIndex++){
+                    if(buttonIndex == index) {
+                      difficultyChecker[buttonIndex] = true;
+                      difficulty = difficultyList[buttonIndex];
+                    }else{
+                      difficultyChecker[buttonIndex] = false;
+                    }
+                  }
+                });
               },
-              child: const Text('普通'),
+              isSelected: difficultyChecker,
             ),
 
             //ページ遷移をするボタン、languageとdifficultyを渡す
