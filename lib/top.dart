@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:typing_app/page_change_test.dart';
 
 void main() {
   runApp(const Top());
@@ -25,42 +26,52 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String text = '押してない';
-  void _press() {
-    setState(() {
-      text = '押した';
-    });
-  }
+  String language = '';
+  String difficulty = '';
 
   @override
   Widget build(BuildContext context) {
+    final ButtonStyle style = ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 40));
+
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('ここにタイトルを入れる'),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle:  const TextStyle(fontSize: 20),
-              ),
-              onPressed: () {},
+            const Text(
+                '言語を選択してください'
+            ),
+            ElevatedButton(
+              style: style,
+              onPressed: () {
+                  language = 'C';
+              },
               child: const Text('C'),
             ),
             TextButton(
               style: TextButton.styleFrom(
-                textStyle:  const TextStyle(fontSize: 20),
+                textStyle:  const TextStyle(fontSize: 40),
               ),
-              onPressed: () {},
-              child: const Text('C#'),
+              onPressed: () {
+                difficulty = '普通';
+              },
+              child: const Text('普通'),
+            ),
+            ElevatedButton(
+                onPressed: (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => NewPage(language,difficulty))
+                  );
+                },
+                child: const Text('start!')
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _press,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
