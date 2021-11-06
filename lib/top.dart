@@ -58,16 +58,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     '言語を選択してください',
                     style: TextStyle(fontSize: 40),
                   ),
+
+                  //言語選択ボタン
                   ToggleButtons(
-
-
-    
-                    children: <Widget>[
-                      const Text(
-                        '言語を選択してください',
-                        style: TextStyle(fontSize: 40),
-                      ),
-                      ToggleButtons(
                         children: <Widget>[
                           Text(languageList[0]),
                           Text(languageList[1]),
@@ -103,15 +96,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
               ),
 
-
-              //言語選択ボタン
-
-
-              const Text(
+            const Text(
                 '難易度を選択してください。',
-
               style: TextStyle(fontSize: 40),
             ),
+
             //難易度選択ボタン
             ToggleButtons(
               children: const <Widget>[
@@ -135,28 +124,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
             ),
 
-            //ページ遷移をするボタン、languageとdifficultyを渡す
-            ElevatedButton(
-                onPressed: (){
-                  //どちらかが選択されていないならページ遷移しない。
-                  if (language != '' && difficulty != 0) {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => TypingGame(language, difficulty))
-                    );
-                  }
-
-
-                },
-                isSelected: difficultyChecker,
-
-              ),
-
               //ページ遷移をするボタン、languageとdifficultyを渡す
               ElevatedButton(
                   onPressed: () {
-                    if (language != '' && difficulty != '') {
+                    if (language != '' && difficulty != 0) {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
