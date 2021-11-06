@@ -59,46 +59,57 @@ class _MyHomePageState extends State<MyHomePage> {
                     style: TextStyle(fontSize: 40),
                   ),
                   ToggleButtons(
+
+
+    
                     children: <Widget>[
-                      Text(languageList[0]),
-                      Text(languageList[1]),
-                      Text(languageList[2]),
-                      Text(languageList[3]),
-                      Text(languageList[4]),
-                      Text(languageList[5]),
-                      Text(languageList[6]),
-                      Text(languageList[7]),
-                      Text(languageList[8]),
+                      const Text(
+                        '言語を選択してください',
+                        style: TextStyle(fontSize: 40),
+                      ),
+                      ToggleButtons(
+                        children: <Widget>[
+                          Text(languageList[0]),
+                          Text(languageList[1]),
+                          Text(languageList[2]),
+                          Text(languageList[3]),
+                          Text(languageList[4]),
+                          Text(languageList[5]),
+                          Text(languageList[6]),
+                          Text(languageList[7]),
+                          Text(languageList[8]),
+                        ],
+                        onPressed: (int index) {
+                          setState(() {
+                            for (int buttonIndex = 0; buttonIndex <
+                                languageChecker.length; buttonIndex++) {
+                              if (buttonIndex == index) {
+                                languageChecker[buttonIndex] = true;
+                                language = languageList[buttonIndex];
+                              } else {
+                                languageChecker[buttonIndex] = false;
+                              }
+                            }
+                          });
+                        },
+                        isSelected: languageChecker,
+                        textStyle: const TextStyle(fontSize: 20),
+                        borderWidth: 2,
+                        borderColor: Colors.black,
+                        selectedBorderColor: Colors.black,
+                      ),
                     ],
-                    onPressed: (int index){
-                      setState(() {
-                        for(int buttonIndex = 0; buttonIndex < languageChecker.length; buttonIndex++){
-                          if(buttonIndex == index) {
-                            languageChecker[buttonIndex] = true;
-                            language = languageList[buttonIndex];
-                          }else{
-                            languageChecker[buttonIndex] = false;
-                          }
-                        }
-                      });
-                    },
-                    isSelected: languageChecker,
-                    textStyle: const TextStyle(fontSize: 20),
-                    borderWidth: 2,
-                    borderColor: Colors.black,
-                    selectedBorderColor: Colors.black,
-                  ),
-                ],
-              )
+                  )
 
-            ),
+              ),
 
 
-            //言語選択ボタン
+              //言語選択ボタン
 
 
-            const Text(
+              const Text(
                 '難易度を選択してください。',
+
               style: TextStyle(fontSize: 40),
             ),
             //難易度選択ボタン
@@ -136,12 +147,29 @@ class _MyHomePageState extends State<MyHomePage> {
                     );
                   }
 
+
                 },
-                child: const Text('start!')
-            ),
-          ],
+                isSelected: difficultyChecker,
+
+              ),
+
+              //ページ遷移をするボタン、languageとdifficultyを渡す
+              ElevatedButton(
+                  onPressed: () {
+                    if (language != '' && difficulty != '') {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  TypingGame(language, difficulty))
+                      );
+                    }
+                  },
+                  child: const Text('start!')
+              ),
+            ],
+          ),
         ),
-      ),
-    );
-  }
+      );
+    }
 }
