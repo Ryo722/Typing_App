@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:typing_app/TypingGame.dart';
-import 'package:typing_app/page_change_test.dart';
+//import 'package:typing_app/page_change_test.dart';
+import 'package:typing_app/typinggame.dart';
 
 void main() {
   runApp(const Top());
@@ -30,46 +30,38 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String language = '';     //言語を選択
   int difficulty = 0;   //難易度を選択
+  static const List<String> languageList = ['C','C#','C++','python','Java Script','Java','php','ruby','go'];
+  List<bool> languageChecker = List.generate(languageList.length, (_) => false);
+  static const List<int> difficultyList = [10,15,20];
+  List<bool> difficultyChecker = List.generate(difficultyList.length, (_) => false);
 
-  static const List<String> languageList = [
-      'C',
-      'C#',
-      'C++',
-      'Python',
-      'JavaScript',
-      'Java',
-      'PHP',
-      'Ruby',
-      'Go'
-    ];
-    List<bool> languageChecker = List.generate(
-        languageList.length, (_) => false);
-    static const List<int> difficultyList = [5, 10, 15];
-    List<bool> difficultyChecker = List.generate(
-        difficultyList.length, (_) => false);
 
-    @override
-    Widget build(BuildContext context) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('ここにタイトルを入れる'),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
+  @override
+  Widget build(BuildContext context) {
 
-              Container(
-                  width: MediaQuery
-                      .of(context)
-                      .size
-                      .width,
-                  height: MediaQuery
-                      .of(context)
-                      .size
-                      .height / 3,
-                  color: Colors.black12,
-                  child: Column(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('ここにタイトルを入れる'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height /3,
+              color: Colors.black12,
+              child: Column(
+                children: <Widget>[
+                  const Text(
+                    '言語を選択してください',
+                    style: TextStyle(fontSize: 40),
+                  ),
+                  ToggleButtons(
+
+
+    
                     children: <Widget>[
                       const Text(
                         '言語を選択してください',
@@ -117,27 +109,45 @@ class _MyHomePageState extends State<MyHomePage> {
 
               const Text(
                 '難易度を選択してください。',
-                style: TextStyle(fontSize: 40),
-              ),
-              //難易度選択ボタン
-              ToggleButtons(
-                children: <Widget>[
-                  Text(difficultyList[0].toString()),
-                  Text(difficultyList[1].toString()),
-                  Text(difficultyList[2].toString()),
-                ],
-                onPressed: (int index) {
-                  setState(() {
-                    for (int buttonIndex = 0; buttonIndex <
-                        difficultyChecker.length; buttonIndex++) {
-                      if (buttonIndex == index) {
-                        difficultyChecker[buttonIndex] = true;
-                        difficulty = difficultyList[buttonIndex];
-                      } else {
-                        difficultyChecker[buttonIndex] = false;
-                      }
+
+              style: TextStyle(fontSize: 40),
+            ),
+            //難易度選択ボタン
+            ToggleButtons(
+              children: const <Widget>[
+                Text('10問'),
+                Text('15問'),
+                Text('20問'),
+              ],
+              onPressed: (int index){
+                setState(() {
+                  for(int buttonIndex = 0; buttonIndex < difficultyChecker.length; buttonIndex++){
+                    if(buttonIndex == index) {
+                      difficultyChecker[buttonIndex] = true;
+                      difficulty = difficultyList[buttonIndex];
+                    }else{
+                      difficultyChecker[buttonIndex] = false;
                     }
-                  });
+                  }
+                });
+              },
+              isSelected: difficultyChecker,
+
+            ),
+
+            //ページ遷移をするボタン、languageとdifficultyを渡す
+            ElevatedButton(
+                onPressed: (){
+                  //どちらかが選択されていないならページ遷移しない。
+                  if (language != '' && difficulty != 0) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => TypingGame(language, difficulty))
+                    );
+                  }
+
+
                 },
                 isSelected: difficultyChecker,
 
