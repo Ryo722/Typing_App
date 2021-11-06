@@ -26,8 +26,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String language = '';
-  String difficulty = '';
+  String language = '';     //言語を選択
+  String difficulty = '';   //難易度を選択
+
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +45,10 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(
                 '言語を選択してください'
             ),
+            
+            //
+            
+            //言語選択をする。トグルボタンのリスト予定
             ElevatedButton(
               style: style,
               onPressed: () {
@@ -51,6 +56,11 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: const Text('C'),
             ),
+            const Text(
+              '難易度を選択してください'
+            ),
+
+            //難易度を選択する。トグルボタンのリスト予定
             TextButton(
               style: TextButton.styleFrom(
                 textStyle:  const TextStyle(fontSize: 40),
@@ -60,6 +70,8 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: const Text('普通'),
             ),
+
+            //ページ遷移をするボタン、languageとdifficultyを渡す
             ElevatedButton(
                 onPressed: (){
                   Navigator.push(
