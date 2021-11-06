@@ -1,46 +1,74 @@
 import 'package:flutter/material.dart';
-import 'package:typing_result/main.dart';   //typing page
-import 'package:typing_result/second.dart'; //select page
+import 'package:layout_practice/pagination.dart';
+
+void main() {
+  runApp(ResultPage('speed', 'accuracy'));
+}
 
 class ResultPage extends StatelessWidget {
   ResultPage(this.speed, this.accuracy);
-  final String speed;//speed data
-  final String accuracy;//speed data
+  final String speed;      //速さのデータ
+  final String accuracy;//正確さのデータ
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Result Page"),
+        title: Text("結果発表！"),
       ),
       body: Center(
         child: Column(
           children: <Widget>[
-            const Text('wpm', textAlign: TextAlign.center),
-            Text(speed),
-            const Text('accuracy', textAlign: TextAlign.center),
-            Text(accuracy),
-            //again button
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (context) {
-                          return SecondPage();
-                        }));
-              },
-              child: const Text('Top'),
+            Row(
+              children: <Widget>[
+                //result speed
+                Container(
+                  width: MediaQuery.of(context).size.width / 2,
+                  height: MediaQuery.of(context).size.height * (30 / 100),
+                  color: Colors.pinkAccent,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(child: Text('wpm', textAlign: TextAlign.center)),
+                      Container(child: Text('$speed')),
+                    ],
+                  ),
+                ),
+                //result accuracy
+                Container(
+                  width: MediaQuery.of(context).size.width / 2,
+                  height: MediaQuery.of(context).size.height * (30 / 100),
+                  color: Colors.lightBlueAccent,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(child: Text('accuracy', textAlign: TextAlign.center)),
+                      Container(child: Text(accuracy)),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            //top button
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (context) {
-                          return MyApp();
-                        }));
-                },
-              child: const Text('Again'),
+            Row(
+              children: <Widget>[
+                //again button
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Top()),
+                    );
+                  },
+                  child: const Text('Top'),
+                ),
+                //top button
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Again'),
+                ),
+              ],
             ),
           ],
         ),
