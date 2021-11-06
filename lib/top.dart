@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:typing_app/TypingGame.dart';
 import 'package:typing_app/page_change_test.dart';
 
 void main() {
@@ -10,7 +11,8 @@ class Top extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'ここにタイトルが入る',
+
+      title: 'TypingGame',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -28,6 +30,14 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String language = '';     //言語を選択
   String difficulty = '';   //難易度を選択
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    final ButtonStyle style = ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 40));
+
+
   static const List<String> languageList = ['C','C#','C++','python','Java Script','Java','php','ruby','go'];
   List<bool> languageChecker = List.generate(languageList.length, (_) => false);
   static const List<String> difficultyList = ['簡単','普通','難しい'];
@@ -35,6 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('ここにタイトルを入れる'),
@@ -43,6 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+
             Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height /3,
@@ -116,11 +128,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 });
               },
               isSelected: difficultyChecker,
+
             ),
 
             //ページ遷移をするボタン、languageとdifficultyを渡す
             ElevatedButton(
                 onPressed: (){
+
                   if (language != '' && difficulty != '') {
                     Navigator.push(
                         context,
@@ -128,6 +142,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             builder: (context) => NewPage(language, difficulty))
                     );
                   }
+
                 },
                 child: const Text('start!')
             ),
