@@ -5,37 +5,41 @@ import 'dart:async';
 //void main() => runApp(MyApp());
 
 class TypingGame extends StatelessWidget {
-  TypingGame(this.language, this.difficulty, {Key? key}) : super(key: key);
+  const TypingGame(this.language, this.difficulty, {Key? key}) : super(key: key);
 
   final String language;
-  final String difficulty;
+  final int difficulty;
+  final String title = 'Typing game';
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Typing game',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Typing game'),
+      home: TypingGamePage(title: title, language: language, difficulty: difficulty)
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class TypingGamePage extends StatefulWidget {
   final String title;
+  final String language;
+  final int difficulty;
 
-  const MyHomePage({
+  const TypingGamePage({
     Key? key,
     required this.title,
+    required this.language,
+    required this.difficulty,
   }) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _TypingGamePageState createState() => _TypingGamePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _TypingGamePageState extends State<TypingGamePage> {
   var textLists = <String>[
     'Hello World',
     'This is my App',
@@ -47,18 +51,18 @@ class _MyHomePageState extends State<MyHomePage> {
     'Let it be'
   ];
 
-  int num = 0;
-  int length = 0;
-  int inputWordChecker = 0;
+  int num = 0; //リストから取得する単語の番号
+  int targetNum = 0; //問題数
+  int length = 0; //出題した単語の文字数
+  int inputWordChecker = 0; //入力されている文字が先頭から見て部分一致していれば0，していなければ-1
   String targetWord = 'hello';
-  String targetWordUntype = 'hello';
+  String targetWordUntyped = 'hello';
   String targetWordtyped = '';
   String key = 'A';
   String inputText = '';
   final _focusNode = FocusNode();
   final _controller = TextEditingController();
-  //Timer timer;
-  //Datetime time;
+  Stopwatch stopwatch = Stopwatch();
 
   @override
   void initState() {
@@ -66,6 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     // Start listening to changes.
     _controller.addListener(_printLatestValue);
+    stopwatch.start();
   }
 
   @override
@@ -83,16 +88,32 @@ class _MyHomePageState extends State<MyHomePage> {
     num = Random().nextInt(8);
     setState(() {
       targetWord = textLists[num];
-      targetWordUntype = textLists[num];
+      targetWordUntyped = textLists[num];
+      targetWordtyped = '';
       _controller.clear();
     });
-    print(targetWordUntype);
+    print(targetWordUntyped);
+    targetNum ++;
+    checkStopwatch();
   }
 
   void getWordfromTarget(){
     length = inputText.length;
-    inputWordChecker = targetWord.lastIndexOf(inputText, length);
-    print('inputWordChecker: ${inputWordChecker}');
+    checkInputWord();
+  }
+
+  void checkInputWord(){
+    if(targetWord.lastIndexOf(inputText, length) == 0){
+      targetWordtyped = inputText;
+      targetWordUntyped = targetWord.substring(length);
+    }
+  }
+
+  void checkStopwatch(){
+    if(targetNum == widget.difficulty){
+      stopwatch.stop();
+      print(stopwatch.elapsed);
+    }
   }
 
   @override
@@ -106,14 +127,25 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              key,
+              'Language : ' + widget.language,
+              style: Theme.of(context).textTheme.headline4,
             ),
+
             Text(
               targetWord,
             ),
-            Text(
-              targetWordUntype,
-              style: Theme.of(context).textTheme.headline4,
+            RichText(
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: targetWordtyped,
+                    style: const TextStyle(color: Colors.blue, fontSize: 24),
+                  ),
+                  TextSpan(
+                    text: targetWordUntyped,
+                  )
+                ],
+              ),
             ),
             ElevatedButton(
               onPressed: getWordRandom,

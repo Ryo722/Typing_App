@@ -76,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: (){
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => TypingGame('c', 'nomal'))
+                      MaterialPageRoute(builder: (context) => TypingGame('c', 3))
                   );
                 },
                 child: const Text('start!')
