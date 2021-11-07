@@ -4,8 +4,8 @@ import 'package:typing_app/top.dart';
 
 class ResultPage extends StatelessWidget {
   ResultPage(this.speed, this.accuracy);
-  final int speed;      //速さのデータ
-  final String accuracy;//正確さのデータ
+  final double speed;      //速さのデータ
+  final double accuracy;//正確さのデータ
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +26,8 @@ class ResultPage extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Container(child: Text('wpm', textAlign: TextAlign.center)),
-                      Container(child: Text('$speed')),
+                      Container(child: Text('KPM', textAlign: TextAlign.center)),
+                      Container(child: Text(speed.toStringAsFixed(2))),
                     ],
                   ),
                 ),
@@ -40,7 +40,7 @@ class ResultPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Container(child: Text('accuracy', textAlign: TextAlign.center)),
-                      Container(child: Text(accuracy)),
+                      Container(child: Text(accuracy.toStringAsFixed(3))),
                     ],
                   ),
                 ),
@@ -61,7 +61,7 @@ class ResultPage extends StatelessWidget {
                 //top button
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Navigator.of(context).pop(true);
                   },
                   child: const Text('Again'),
                 ),
