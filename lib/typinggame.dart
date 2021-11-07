@@ -177,6 +177,7 @@ class _TypingGamePageState extends State<TypingGamePage> {
                 'Language : ' + widget.language,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
+            ),
               Text(
                 '現在' + targetNum.toString() + '/' + widget.difficulty.toString() + '問目',
                 style: TextStyle(fontSize: 20),
