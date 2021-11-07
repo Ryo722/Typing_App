@@ -44,14 +44,7 @@ class TypingGamePage extends StatefulWidget {
 
 class _TypingGamePageState extends State<TypingGamePage> {
   var textLists = <String>[
-    'Hello World',
-    'This is my App',
-    'How are you?',
-    'Hello Hello',
-    'I love JavaScript!',
-    'Good morning',
-    'I am Japanese',
-    'Let it be'
+    'Let`s Start!',
   ];
 
   int num = 0; //リストから取得する単語の番号
@@ -71,23 +64,23 @@ class _TypingGamePageState extends State<TypingGamePage> {
   Stopwatch stopwatch = Stopwatch();
 
 
+
   void getWorkDone() async{
     final csvFile= await rootBundle.loadString('languagecsv/' + widget.language +'.csv');
     for (String line in csvFile.split("\r\n")) {
       // カンマ区切りで各列のデータを配列に格納
       //List rows = line.split(','); // split by comma
       textLists = line.split(',');
+      getWordRandom();
     }
   }
 
   @override
   void initState() {
     getWorkDone();
-    getWordRandom();
     super.initState();
     // Start listening to changes.
     _controller.addListener(_printLatestValue);
-
   }
 
   @override
@@ -101,7 +94,7 @@ class _TypingGamePageState extends State<TypingGamePage> {
   }
 
   void getWordRandom(){
-    num = Random().nextInt(8);
+    num = Random().nextInt(textLists.length);
     setState(() {
       targetWord = textLists[num];
       targetWordUntyped = textLists[num];
