@@ -171,28 +171,21 @@ class _TypingGamePageState extends State<TypingGamePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-<<<<<<< HEAD
             Container(
               margin: const EdgeInsets.only(top: 40),
               child: Text(
                 'Language : ' + widget.language,
-                style: Theme.of(context).textTheme.headline4,
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
-            ),
+              Text(
+                '現在' + targetNum.toString() + '/' + widget.difficulty.toString() + '問目',
+                style: TextStyle(fontSize: 20),
+              ),
             //スペース調整
             SizedBox(
               child: Container(
                 height: 130,
               ),
-=======
-            Text(
-              'Language : ' + widget.language,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              '現在' + targetNum.toString() + '/' + widget.difficulty.toString() + '問目',
-              style: TextStyle(fontSize: 20),
->>>>>>> 5fec331307fb88f59ccb1a7c9bcfafc3c7b390d0
             ),
             RichText(
               text: TextSpan(

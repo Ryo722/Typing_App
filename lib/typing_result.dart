@@ -1,15 +1,4 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'package:typing_app/top.dart';
-
-class ResultPage extends StatelessWidget {
-  ResultPage(this.language, this.difficulty, this.speed, this.accuracy);
-  final String language;  //選択言語
-  final String difficulty;//難易度
-  final int speed;        //速さのデータ
-  final int accuracy;     //正確さのデータ
-
-=======
 //import 'package:layout_practice/pagination.dart';
 import 'package:typing_app/top.dart';
 
@@ -17,7 +6,6 @@ class ResultPage extends StatelessWidget {
   ResultPage(this.speed, this.accuracy);
   final double speed;      //速さのデータ
   final double accuracy;//正確さのデータ
->>>>>>> 5fec331307fb88f59ccb1a7c9bcfafc3c7b390d0
 
   @override
   Widget build(BuildContext context) {
@@ -52,11 +40,7 @@ class ResultPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Container(child: Text('accuracy', textAlign: TextAlign.center)),
-<<<<<<< HEAD
-                      Container(child: Text('$accuracy')),
-=======
                       Container(child: Text(accuracy.toStringAsFixed(3))),
->>>>>>> 5fec331307fb88f59ccb1a7c9bcfafc3c7b390d0
                     ],
                   ),
                 ),
@@ -77,11 +61,7 @@ class ResultPage extends StatelessWidget {
                 //top button
                 ElevatedButton(
                   onPressed: () {
-<<<<<<< HEAD
-                    Navigator.of(context).pop({context, language, difficulty});
-=======
                     Navigator.of(context).pop(true);
->>>>>>> 5fec331307fb88f59ccb1a7c9bcfafc3c7b390d0
                   },
                   child: const Text('Again'),
                 ),
