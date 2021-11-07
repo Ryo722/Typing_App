@@ -255,7 +255,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   onPressed: () {
-                    if (language != '' && difficulty != '') {
+                    if (language != '' && difficulty != 0) {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
