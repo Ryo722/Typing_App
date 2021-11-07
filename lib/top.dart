@@ -17,6 +17,10 @@ class Top extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(),
+      routes: {
+        // When navigating to the "/" route, build the FirstScreen widget.
+        '/top': (context) => const Top(),
+    },
     );
   }
 }
