@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:layout_practice/top.dart';
+import 'package:typing_app/top.dart';
 
 class ResultPage extends StatelessWidget {
   ResultPage(this.language, this.difficulty, this.speed, this.accuracy);
