@@ -45,36 +45,108 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ここにタイトルを入れる'),
+        title: const Text('Typing Game'),
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-
             Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height /3,
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height / 5,
                 color: Colors.black12,
                 child: Column(
                   children: <Widget>[
-                    const Text(
-                      '言語を選択してください',
-                      style: TextStyle(fontSize: 40),
+                    Container(
+                      margin: const EdgeInsets.only(top: 20.0, bottom: 10.0),
+                      child: const Text(
+                        '言語を選択してください',
+                        style: TextStyle(fontSize: 25),
+                      ),
                     ),
-
-                    //言語選択ボタン
                     ToggleButtons(
                       children: <Widget>[
-                        Text(languageList[0]),
-                        Text(languageList[1]),
-                        Text(languageList[2]),
-                        Text(languageList[3]),
-                        Text(languageList[4]),
-                        Text(languageList[5]),
-                        Text(languageList[6]),
-                        Text(languageList[7]),
-                        Text(languageList[8]),
+                        Container(
+                          padding: const EdgeInsets.all(10.0),
+                          margin: const EdgeInsets.only(left:2.0, right: 2.0),
+                          width: MediaQuery.of(context).size.width / 12,
+                          height: MediaQuery.of(context).size.height / 12,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Text(languageList[0]),
+                          alignment: Alignment.center,
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(10.0),
+                          margin: const EdgeInsets.only(left:2.0, right: 2.0),
+                          width: MediaQuery.of(context).size.width / 12,
+                          height: MediaQuery.of(context).size.height / 12,
+                          child: Text(languageList[1]),
+                          alignment: Alignment.center,
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(10.0),
+                          margin: const EdgeInsets.only(left:2.0, right: 2.0),
+                          width: MediaQuery.of(context).size.width / 12,
+                          height: MediaQuery.of(context).size.height / 12,
+                          child: Text(languageList[2]),
+                          alignment: Alignment.center,
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(10.0),
+                          margin: const EdgeInsets.only(left:2.0, right: 2.0),
+                          width: MediaQuery.of(context).size.width / 8,
+                          height: MediaQuery.of(context).size.height / 12,
+                          child: Text(languageList[3]),
+                          alignment: Alignment.center,
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(10.0),
+                          margin: const EdgeInsets.only(left:2.0, right: 2.0),
+                          width: MediaQuery.of(context).size.width / 7,
+                          height: MediaQuery.of(context).size.height / 12,
+                          child: Text(languageList[4]),
+                          alignment: Alignment.center,
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(10.0),
+                          margin: const EdgeInsets.only(left:2.0, right: 2.0),
+                          width: MediaQuery.of(context).size.width / 12,
+                          height: MediaQuery.of(context).size.height / 12,
+                          child: Text(languageList[5]),
+                          alignment: Alignment.center,
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(10.0),
+                          margin: const EdgeInsets.only(left:2.0, right: 2.0),
+                          width: MediaQuery.of(context).size.width / 12,
+                          height: MediaQuery.of(context).size.height / 12,
+                          child: Text(languageList[6]),
+                          alignment: Alignment.center,
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(10.0),
+                          margin: const EdgeInsets.only(left:2.0, right: 2.0),
+                          width: MediaQuery.of(context).size.width / 12,
+                          height: MediaQuery.of(context).size.height / 12,
+                          child: Text(languageList[7]),
+                          alignment: Alignment.center,
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(10.0),
+                          margin: const EdgeInsets.only(left:2.0, right: 2.0),
+                          width: MediaQuery.of(context).size.width / 12,
+                          height: MediaQuery.of(context).size.height / 12,
+                          child: Text(languageList[8]),
+                          alignment: Alignment.center,
+                        ),
                       ],
                       onPressed: (int index) {
                         setState(() {
@@ -97,50 +169,110 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ],
                 )
-
             ),
 
-            const Text(
-              '難易度を選択してください。',
-              style: TextStyle(fontSize: 40),
+            //言語選択ボタン
+            Container(
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width,
+              height: MediaQuery
+                  .of(context)
+                  .size
+                  .height / 5,
+              color: Colors.black12,
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    margin: const EdgeInsets.only(top: 20.0, bottom: 10.0),
+                    child: const Text(
+                      '難易度（出題数）を選択してください',
+                      style: TextStyle(fontSize: 25),
+                    ),
+                  ),
+                  //難易度選択ボタン
+                  ToggleButtons(
+                    children: <Widget>[
+                      Container(
+                        padding: const EdgeInsets.all(10.0),
+                        margin: const EdgeInsets.only(left:2.0, right: 2.0),
+                        width: 70,
+                        height: 70,
+                        child: Text(difficultyList[0].toString(), style: TextStyle(fontSize: 20)),
+                        alignment: Alignment.center,
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(10.0),
+                        margin: const EdgeInsets.only(left:2.0, right: 2.0),
+                        width: 70,
+                        height: 70,
+                        child: Text(difficultyList[1].toString(), style: TextStyle(fontSize: 20)),
+                        alignment: Alignment.center,
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(10.0),
+                        margin: const EdgeInsets.only(left:2.0, right: 2.0),
+                        width: 70,
+                        height: 70,
+                        child: Text(difficultyList[2].toString(), style: TextStyle(fontSize: 20)),
+                        alignment: Alignment.center,
+                      ),
+                    ],
+                    onPressed: (int index) {
+                      setState(() {
+                        for (int buttonIndex = 0; buttonIndex <
+                            difficultyChecker.length; buttonIndex++) {
+                          if (buttonIndex == index) {
+                            difficultyChecker[buttonIndex] = true;
+                            difficulty = difficultyList[buttonIndex];
+                          } else {
+                            difficultyChecker[buttonIndex] = false;
+                          }
+                        }
+                      });
+                    },
+                    isSelected: difficultyChecker,
+
+                  ),
+                ],
+              ),
             ),
 
-            //難易度選択ボタン
-            ToggleButtons(
-              children: const <Widget>[
-                Text('10問'),
-                Text('15問'),
-                Text('20問'),
-              ],
-              onPressed: (int index){
-                setState(() {
-                  for(int buttonIndex = 0; buttonIndex < difficultyChecker.length; buttonIndex++){
-                    if(buttonIndex == index) {
-                      difficultyChecker[buttonIndex] = true;
-                      difficulty = difficultyList[buttonIndex];
-                    }else{
-                      difficultyChecker[buttonIndex] = false;
-                    }
-                  }
-                });
-              },
-              isSelected: difficultyChecker,
-
-            ),
 
             //ページ遷移をするボタン、languageとdifficultyを渡す
-            ElevatedButton(
-                onPressed: () {
-                  if (language != '' && difficulty != 0) {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                TypingGame(language, difficulty))
-                    );
-                  }
-                },
-                child: const Text('start!')
+            Container(
+              margin: const EdgeInsets.only(top: 50.0),
+              child: SizedBox(
+                width: 150,
+                height: 60,
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                    ),
+                  ),
+                  onPressed: () {
+                    if (language != '' && difficulty != '') {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  TypingGame(language, difficulty))
+                      );
+                    }
+                  },
+                  child: const Text(
+                    'Start!',
+                    style: TextStyle(
+                      letterSpacing: 1.3,
+                      fontSize: 25,
+                    ),
+                  ),
+                ),
+              ),
             ),
           ],
         ),

@@ -6,7 +6,6 @@ import 'dart:io';
 import 'package:typing_app/typing_result.dart';
 import 'package:flutter/services.dart';
 
-//void main() => runApp(MyApp());
 
 class TypingGame extends StatelessWidget {
   const TypingGame(this.language, this.difficulty,  {Key? key}) : super(key: key);
@@ -169,15 +168,24 @@ class _TypingGamePageState extends State<TypingGamePage> {
       ),
       body: Center (
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(
-              'Language : ' + widget.language,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              '現在' + targetNum.toString() + '/' + widget.difficulty.toString() + '問目',
-              style: TextStyle(fontSize: 20),
+            Container(
+              margin: const EdgeInsets.only(top: 40),
+              child: Text(
+                'Language : ' + widget.language,
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                '現在' + targetNum.toString() + '/' + widget.difficulty.toString() + '問目',
+                style: TextStyle(fontSize: 20),
+              ),
+            //スペース調整
+            SizedBox(
+              child: Container(
+                height: 130,
+              ),
             ),
             RichText(
               text: TextSpan(
@@ -185,16 +193,21 @@ class _TypingGamePageState extends State<TypingGamePage> {
                 children: [
                   TextSpan(
                     text: targetWordtyped,
-                    style: const TextStyle(color: Colors.blue, fontSize: 40),
+                    style: const TextStyle(color: Colors.blue, fontSize: 60),
                   ),
                   TextSpan(
                     text: targetWordUntyped,
-                    style: const TextStyle(fontSize: 20),
+                    style: const TextStyle(fontSize: 40),
                   )
                 ],
               ),
             ),
-
+            //スペース調整
+            SizedBox(
+              child: Container(
+                height: 60,
+              ),
+            ),
             //キー入力を取得
             RawKeyboardListener(
               focusNode: _focusNode,
@@ -208,12 +221,20 @@ class _TypingGamePageState extends State<TypingGamePage> {
                 }
                 numofKeyTouch ++;
               },
-              child: TextField(
-                maxLength: maxLengthofInputField,
-                // enterが押された時の動作を「何もしない」ように指定（デフォルトだとフォーカスが外れるため）
-                textInputAction: TextInputAction.none,
-                controller: _controller,
-                autofocus: true,
+              child: Container(
+                width: 300,
+
+                child: TextField(
+                  style: TextStyle(
+                    fontSize: 40,
+                    color: Colors.black,
+                  ),
+                  maxLength: maxLengthofInputField,
+                  // enterが押された時の動作を「何もしない」ように指定（デフォルトだとフォーカスが外れるため）
+                  textInputAction: TextInputAction.none,
+                  controller: _controller,
+                  autofocus: true,
+                ),
               ),
             ),
           ],
