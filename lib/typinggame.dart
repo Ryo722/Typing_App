@@ -45,7 +45,6 @@ class TypingGamePage extends StatefulWidget {
 
 class _TypingGamePageState extends State<TypingGamePage> {
   var textLists = <String>[
-
     'Hello World',
     'This is my App',
     'How are you?',
@@ -54,8 +53,6 @@ class _TypingGamePageState extends State<TypingGamePage> {
     'Good morning',
     'I am Japanese',
     'Let it be'
-
-
   ];
 
   int num = 0; //リストから取得する単語の番号
