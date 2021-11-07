@@ -55,7 +55,7 @@ class _TypingGamePageState extends State<TypingGamePage> {
   ];
 
   int num = 0; //リストから取得する単語の番号
-  int targetNum = 1; //問題数
+  int targetNum = 0; //問題数
   int length = 0; //出題した単語の文字数
   int lengthSum = 0; //出題した単語の文字数の合計
   int inputWordChecker = 0; //入力されている文字が先頭から見て部分一致していれば0，していなければ-1
@@ -78,17 +78,16 @@ class _TypingGamePageState extends State<TypingGamePage> {
       //List rows = line.split(','); // split by comma
       textLists = line.split(',');
     }
-    print(textLists);
   }
 
   @override
   void initState() {
+    getWorkDone();
+    getWordRandom();
     super.initState();
     // Start listening to changes.
     _controller.addListener(_printLatestValue);
 
-    getWorkDone();
-    getWordRandom();
   }
 
   @override
@@ -144,11 +143,12 @@ class _TypingGamePageState extends State<TypingGamePage> {
               builder: (context) =>
                   ResultPage(calculateKPM(), calculateAccuracy()))
       ).then((value){
-        targetNum = 0;
+
         numofKeyTouch = 0;
         lengthSum = 0;
         stopwatch.reset();
       });
+      targetNum = 0;
     }
   }
 
@@ -177,6 +177,7 @@ class _TypingGamePageState extends State<TypingGamePage> {
                 'Language : ' + widget.language,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
+            ),
               Text(
                 '現在' + targetNum.toString() + '/' + widget.difficulty.toString() + '問目',
                 style: TextStyle(fontSize: 20),
