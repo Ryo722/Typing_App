@@ -150,7 +150,7 @@ class _TypingGamePageState extends State<TypingGamePage> {
   }
 
   double calculateAccuracy(){
-    return lengthSum / (numofKeyTouch / 2); // なぜかキータッチが2倍カウントされているので補正
+    return lengthSum / numofKeyTouch;
   }
 
   @override
@@ -206,14 +206,16 @@ class _TypingGamePageState extends State<TypingGamePage> {
             RawKeyboardListener(
               focusNode: _focusNode,
               onKey: (event) {
-                setState(() {
-                  key = event.logicalKey.keyLabel;
-                });
-                getWordfromTarget();
-                if(numofKeyTouch == 0){
-                  stopwatch.start();
+                if (event is RawKeyDownEvent) {
+                  setState(() {
+                    key = event.logicalKey.keyLabel;
+                  });
+                  getWordfromTarget();
+                  if (numofKeyTouch == 0) {
+                    stopwatch.start();
+                  }
+                  numofKeyTouch++;
                 }
-                numofKeyTouch ++;
               },
               child: Container(
                 width: 300,
