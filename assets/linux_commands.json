@@ -1,0 +1,5 @@
+[
+  {"command": "ls", "description": "List directory contents"},
+  {"command": "cd", "description": "Change the current directory"},
+  {"command": "mkdir", "description": "Create directories"}
+]
