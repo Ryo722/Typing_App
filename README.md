@@ -1,16 +1,22 @@
-# typing_app
+# Typing App for Linux Commands
 
-Surporters Hackathon.
+This project is a typing practice application designed to help users learn Linux commands. It started as a Surporters Hackathon project and is now evolving toward a learning tool for command-line proficiency.
+
+## Development
+
+Development follows a test-driven approach. When a test fails, fix the implementation instead of modifying the test. See [Development Plan](docs/development_plan.md) for tasks and guidelines.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+To run the project:
 
-A few resources to get you started if this is your first Flutter project:
+```bash
+flutter pub get
+flutter run
+```
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Run tests with:
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```bash
+flutter test
+```
